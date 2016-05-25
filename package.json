@@ -1,0 +1,37 @@
+{
+  "name": "aoxjs",
+  "version": "0.1.0",
+  "description": "Static page templates and generator. Building a personal blog is dead simple.",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "gulp"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andorx/aoxjs.git"
+  },
+  "keywords": [
+    "Static",
+    "page",
+    "blog",
+    "engine"
+  ],
+  "author": "andorx <pngduc@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/andorx/aoxjs/issues"
+  },
+  "homepage": "https://github.com/andorx/aoxjs#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-assign-to-pug": "^0.2.0",
+    "gulp-data": "^1.2.1",
+    "gulp-load-plugins": "^1.2.2",
+    "gulp-markdown": "^1.2.0",
+    "gulp-prettify": "^0.4.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace-task": "^0.11.0",
+    "gulp-sass": "^2.3.1",
+    "highlight.js": "^9.4.0"
+  }
+}
