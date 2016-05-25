@@ -1,0 +1,12 @@
+body {
+  background-color: #FAFAFA;
+}
+
+a {
+  &,
+  &:active,
+  &:hover,
+  &:visited {
+    text-decoration: none;
+  }
+}

@@ -1,0 +1,14 @@
+.pageHeader {
+  background-color: #ECF0F1;
+  padding: 30px;
+}
+
+.pageHeader-title {
+  &,
+  &:hover {
+    color: #2C3E50;
+  }
+
+  font-weight: 500;
+  font-size: 20px;
+}
