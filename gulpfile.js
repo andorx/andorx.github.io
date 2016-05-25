@@ -60,20 +60,21 @@ function buildTemplates(src, dest, template) {
   var highlight = require('highlight.js');
 
   return gulp.src(src)
-    .pipe(gulpPlugins.markdown({
+    .pipe(gulpPlugins.metaMarkdown({
       langPrefix: 'hljs ',
       highlight: function(code) {
         return highlight.highlightAuto(code).value;
       }
     }))
     .pipe(gulpPlugins.data(function(file) {
+      var fileContents = JSON.parse(file.contents.toString());
+
       // inject variables for Pug template
-      file.data = {
+      file.data = Object.assign({
         'highlightStyle': fileRelative(src , paths.sources.styles.vendor + 'highlight.js/' + configs.highlightStyle),
         'style': fileRelative(src, paths.dist.styles + 'styles.css')
-      };
-      // var contents = file.contents.toString().trim();
-      // process.stdout.write(file.path + '\n' + contents + '\n');
+      }, fileContents.meta);
+      file.contents = new Buffer(fileContents.html.toString());
     }))
     .pipe(gulpPlugins.assignToPug(template, {
       varName: 'content'
@@ -95,6 +96,7 @@ gulp.task('styles', function buildStyles() {
     .pipe(gulp.dest(paths.dist.styles));
 });
 
+// Get relative path between from and to files
 function fileRelative(from, to) {
   var fromTokens = from.split('/'),
       toTokens = to.split('/'),
