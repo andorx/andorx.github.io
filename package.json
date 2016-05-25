@@ -28,6 +28,7 @@
     "gulp-data": "^1.2.1",
     "gulp-load-plugins": "^1.2.2",
     "gulp-markdown": "^1.2.0",
+    "gulp-meta-markdown": "git+https://github.com/andorx/gulp-meta-markdown.git",
     "gulp-prettify": "^0.4.0",
     "gulp-rename": "^1.2.2",
     "gulp-replace-task": "^0.11.0",
