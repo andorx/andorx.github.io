@@ -1,4 +1,8 @@
 extends ../index.pug
 
 block pageContent
-  != content
+  article.article
+    .article-illutration
+      img.img-fluid&attributes({ src: illustration })
+    .article-content.container
+      != content
