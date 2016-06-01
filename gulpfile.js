@@ -14,7 +14,7 @@ var paths = {
       post: 'templates/post.pug'
     },
     contents: {
-      pages: ['pages/*.md', '!pages/home.md'],
+      pages: 'pages/*.md',
       posts: 'posts/*.md'
     }
   },
@@ -53,6 +53,10 @@ gulp.task('build-homepage', ['generate-archives'], function buildHomepage(done) 
       });
     }))
     .pipe(gulpPlugins.pug())
+    .pipe(gulpPlugins.prettify({
+      indent_size: 4,
+      indent_char: ' '
+    }))
     .pipe(gulp.dest(paths.dist.contents.home));
 });
 
@@ -62,7 +66,9 @@ gulp.task('generate-archives', function generateArchive(done) {
     .pipe(gulpPlugins.data(function(file) {
       var fileContents = JSON.parse(file.contents.toString());
 
-      posts.push(fileContents.meta);
+      posts.push(Object.assign({}, fileContents.meta, {
+        link: [paths.dist.contents.posts, file.relative].join()
+      }));
     }));
 });
 
@@ -76,7 +82,7 @@ gulp.task('build-posts', function buildPosts() {
 gulp.task('build-pages', function buildPages() {
   return buildTemplates(paths.sources.contents.pages,
     paths.dist.contents.pages,
-    paths.sources.templates.post
+    paths.sources.templates.page
   );
 });
 
