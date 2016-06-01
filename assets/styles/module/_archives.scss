@@ -1,0 +1,28 @@
+.archives {
+  list-style-type: none;
+}
+
+.archiveItem {
+  margin-bottom: 20px;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid #BDC3C7;
+  }
+}
+
+.archiveItem-title {
+  h2 {
+    font-size: 20px;
+    font-weight: 500;
+
+    color: #2C3E50;
+
+    margin-bottom: 10px;
+  }
+}
+
+.archiveItem-excerpt {
+  font-weight: 300;
+
+  color: #7F8C8D;
+}

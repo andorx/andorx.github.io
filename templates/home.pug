@@ -1,12 +1,12 @@
 extends ../index.pug
 
 block pageContent
-  .container
-    h2 Will code html for food
-    ul.archive
+  .landingPage.container
+    h2.landingPage-greeting Will code html for food
+    ul.archives
       each post in posts
         li.archiveItem
-          a.archiveItem-title
+          a.archiveItem-title&attributes({ href: post.link })
             h2
               = post.title
           p.archiveItem-excerpt
