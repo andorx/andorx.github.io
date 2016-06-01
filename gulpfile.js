@@ -1,5 +1,5 @@
-var gulp = require('gulp');
-var gulpPlugins = require('gulp-load-plugins')();
+const gulp = require('gulp');
+const gulpPlugins = require('gulp-load-plugins')();
 
 var paths = {
   sources: {
@@ -14,7 +14,6 @@ var paths = {
       post: 'templates/post.pug'
     },
     contents: {
-      home: 'pages/home.md',
       pages: ['pages/*.md', '!pages/home.md'],
       posts: 'posts/*.md'
     }
@@ -22,7 +21,7 @@ var paths = {
   dist: {
     styles: 'assets/styles/',
     contents: {
-      home: '',
+      home: './',
       pages: 'pages/',
       posts: 'posts/'
     }
@@ -33,13 +32,38 @@ var configs = {
   highlightStyle: 'agate.css'
 };
 
-gulp.task('templates', ['build-posts', 'build-pages']);
+gulp.task('default', ['templates', 'styles']);
 
-gulp.task('build-homepage', function buildHomepage() {
-  return buildTemplates(paths.sources.contents.home,
-    dist.contents.home,
-    paths.sources.template.home
-  );
+gulp.task('templates', ['build-posts', 'build-pages', 'build-homepage']);
+
+var posts = [];
+gulp.task('build-homepage', ['generate-archives'], function buildHomepage(done) {
+  return gulp.src(paths.sources.templates.home)
+    .pipe(gulpPlugins.data(function(file) {
+      var tokens = file.path.split('/');
+
+      tokens.pop();
+      tokens.push('index.html');
+      file.path = tokens.join('/');
+
+      file.data = Object.assign(file.data || {}, {
+        posts: posts,
+        highlightStyle: fileRelative(file.relative, paths.sources.styles.vendor + 'highlight.js/' + configs.highlightStyle),
+        style: fileRelative(file.relative, paths.dist.styles + 'styles.css')
+      });
+    }))
+    .pipe(gulpPlugins.pug())
+    .pipe(gulp.dest(paths.dist.contents.home));
+});
+
+gulp.task('generate-archives', function generateArchive(done) {
+  return gulp.src(paths.sources.contents.posts)
+    .pipe(gulpPlugins.metaMarkdown())
+    .pipe(gulpPlugins.data(function(file) {
+      var fileContents = JSON.parse(file.contents.toString());
+
+      posts.push(fileContents.meta);
+    }));
 });
 
 gulp.task('build-posts', function buildPosts() {
@@ -56,8 +80,10 @@ gulp.task('build-pages', function buildPages() {
   );
 });
 
-function buildTemplates(src, dest, template) {
+function buildTemplates(src, dest, template, extraVars) {
   var highlight = require('highlight.js');
+
+  extraVars = extraVars || {};
 
   return gulp.src(src)
     .pipe(gulpPlugins.metaMarkdown({
@@ -71,9 +97,9 @@ function buildTemplates(src, dest, template) {
 
       // inject variables for Pug template
       file.data = Object.assign({
-        'highlightStyle': fileRelative(src , paths.sources.styles.vendor + 'highlight.js/' + configs.highlightStyle),
-        'style': fileRelative(src, paths.dist.styles + 'styles.css')
-      }, fileContents.meta);
+        highlightStyle: fileRelative(src , paths.sources.styles.vendor + 'highlight.js/' + configs.highlightStyle),
+        style: fileRelative(src, paths.dist.styles + 'styles.css')
+      }, fileContents.meta, extraVars);
       file.contents = new Buffer(fileContents.html.toString());
     }))
     .pipe(gulpPlugins.assignToPug(template, {
