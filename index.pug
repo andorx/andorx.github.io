@@ -13,26 +13,17 @@ html(lang='')
   body
     .pageContainer
       header.pageHeader
-        block pageFooter
-          a.pageHeader-title(href='/', red='home')
-            i(class="icon-feather")
-            | AoxJS Static Page
+        block pageHeader
+          ul.pageNavigation
+            li.pageNavigation-item.pageNavigation-title
+              a(href='/', ref='home')
+                i(class="icon-feather")
+                | AoxJS Static Page
+            li.pageNavigation-item.pageNavigation-link
+                a(href='./pages/about') About
 
-      .pageContent
+      section.pageContent
         block pageContent
-          article
-            header
-              h1 article header h1
-              p
-                | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            section
-              h2 article section h2
-              p
-                | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-            footer
-              h3 article footer h3
-              p
-                | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 
       footer.pageFooter
         block pageFooter
