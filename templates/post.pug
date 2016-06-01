@@ -2,7 +2,14 @@ extends ../index.pug
 
 block pageContent
   article.article
-    .article-illutration
-      img.img-fluid&attributes({ src: illustration })
-    .article-content.container
+    header.article-header
+      .article-illutration
+        img.img-fluid&attributes({ src: illustration })
+      h3.article-title.container
+        = title
+      .arcticle-meta.container
+        .article-publishDate
+          i(class='icon-calendar')
+          = publishDate
+    section.article-content.container
       != content

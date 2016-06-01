@@ -3,11 +3,26 @@
 }
 
 .article-illutration {
+  width: 100%;
+  min-height: 300px;
   text-align: center;
 }
 
+.article-title {
+  font-weight: 500;
+}
+
+.article-publishDate {
+  color: #888;
+  font-size: 0.85em;
+
+  [class^="icon-"] {
+    margin-right: 5px;
+  }
+}
+
 .article-content {
-  margin-top: 10px;
+  padding-top: 25px;
 }
 
 .img-fluid {
