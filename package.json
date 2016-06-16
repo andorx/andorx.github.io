@@ -1,6 +1,6 @@
 {
   "name": "aoxjs",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Static page templates and generator. Building a personal blog is dead simple.",
   "main": "gulpfile.js",
   "scripts": {
