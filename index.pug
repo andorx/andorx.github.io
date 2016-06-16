@@ -2,7 +2,7 @@ doctype html
 html(lang='')
   head
     meta(charset='utf-8')
-    title Boilter Static Page
+    title DucP's Blog
     meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
     meta(name='description', content='')
     meta(name='viewport', content='width=device-width, initial-scale=1')
@@ -16,11 +16,11 @@ html(lang='')
         block pageHeader
           ul.pageNavigation
             li.pageNavigation-item.pageNavigation-title
-              a(href='/', ref='home')
+              a(href=siteUrl, ref='home')
                 i(class="icon-feather")
                 | AoxJS Static Page
             li.pageNavigation-item.pageNavigation-link
-                a(href='./pages/about.html') About
+                a(href=siteUrl + 'pages/about.html') About
 
       section.pageContent
         block pageContent
