@@ -77,7 +77,7 @@ function buildTemplates(src, dest, template, extraVars) {
       // inject variables for Pug template
       file.data = Object.assign({
         highlightStyle: fileRelative(src , configs.sources.styles.vendor + 'highlight.js/' + configs.highlightStyle),
-        style: fileRelative(src, configs.dist.styles + 'styles.css'),
+        style: fileRelative(src, configs.dist.styles + 'style.css'),
         siteUrl: configs.siteUrl
       }, fileContents.meta, extraVars);
       file.contents = new Buffer(fileContents.html.toString());
